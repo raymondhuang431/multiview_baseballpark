@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Mutiview_BaseballPark/1.0.0": {
+        "runtime": {
+          "Mutiview_BaseballPark.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Mutiview_BaseballPark/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

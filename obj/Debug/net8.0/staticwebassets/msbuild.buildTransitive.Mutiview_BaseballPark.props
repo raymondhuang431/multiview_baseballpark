@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Mutiview_BaseballPark.props" />
+</Project>
