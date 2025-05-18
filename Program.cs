@@ -24,11 +24,13 @@ if (!string.IsNullOrEmpty(databaseUrl))
         TrustServerCertificate = true
     };
     connectionString = npgsqlBuilder.ToString();
+    Console.WriteLine($"[DEBUG] connectionString: {connectionString}");
 }
 else
 {
     // 本地開發時，吃 appsettings.json 或 appsettings.Development.json 的 DefaultConnection
     connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    Console.WriteLine($"[DEBUG] Fallback connectionString: {connectionString}");
 }
 
 // Add services to the container.
