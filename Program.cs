@@ -16,7 +16,7 @@ if (!string.IsNullOrEmpty(databaseUrl))
     var npgsqlBuilder = new Npgsql.NpgsqlConnectionStringBuilder
     {
         Host = uri.Host,
-        Port = uri.Port,
+        Port = 5432,
         Username = userInfo[0],
         Password = userInfo[1],
         Database = uri.AbsolutePath.TrimStart('/'),
