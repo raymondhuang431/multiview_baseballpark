@@ -1,0 +1,34 @@
+@model IEnumerable<Mutiview_BaseballPark.Models.Stadium>
+
+<h2>Stadiums</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>Capacity</th>
+            <th>Opened Date</th>
+            <th>Surface Type</th>
+            <th>Status</th>
+            <th>Home Team</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.StadiumId</td>
+            <td>@item.StadiumName</td>
+            <td>@item.City</td>
+            <td>@item.Country</td>
+            <td>@item.Capacity</td>
+            <td>@item.OpenedDate?.ToString("yyyy-MM-dd")</td>
+            <td>@item.SurfaceType</td>
+            <td>@item.Status</td>
+            <td>@item.HomeTeam</td>
+        </tr>
+    }
+    </tbody>
+</table> 
