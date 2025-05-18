@@ -9,7 +9,8 @@ string connectionString;
 var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
 if (!string.IsNullOrEmpty(databaseUrl))
 {
-    // 將 DATABASE_URL 轉換為 Npgsql 可用的格式
+    // 修正 scheme
+    databaseUrl = databaseUrl.Replace("postgresql://", "postgres://");
     var uri = new Uri(databaseUrl);
     var userInfo = uri.UserInfo.Split(':');
     var npgsqlBuilder = new Npgsql.NpgsqlConnectionStringBuilder
