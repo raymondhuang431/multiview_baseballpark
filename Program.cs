@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Mutiview_BaseballPark.Data;
+using Mutiview_BaseballPark.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +40,8 @@ builder.Services.AddControllersWithViews();
 // Add PostgreSQL Database Context
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
+
+builder.Services.AddScoped<FirebaseService>();
 
 var app = builder.Build();
 

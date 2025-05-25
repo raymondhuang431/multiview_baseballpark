@@ -6,4 +6,17 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <p><a class="btn btn-primary" href="/Stadiums">查看 Stadiums 資料表</a></p>
+    
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-warning mt-4">
+            @ViewBag.Error
+        </div>
+    }
+    else if (ViewBag.ImageUrl != null)
+    {
+        <div class="mt-4">
+            <img src="@ViewBag.ImageUrl" alt="Firebase Image" class="img-fluid" />
+        </div>
+    }
 </div>
