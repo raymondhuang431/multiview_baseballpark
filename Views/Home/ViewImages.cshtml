@@ -1,32 +1,130 @@
 @model IEnumerable<Mutiview_BaseballPark.Models.ImageViewModel>
 
 @{
-    ViewData["Title"] = "Stadium Images";
+    ViewData["Title"] = "球場座位視角圖";
 }
 
-<h2>@ViewData["Title"]</h2>
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">@ViewData["Title"]</h1>
+        <p class="lead text-muted">探索球場不同座位視角拍攝的圖片</p>
+    </div>
 
-<div class="container">
-    <div class="row">
-        @if (Model != null && Model.Any())
-        {
+    @if (Model != null && Model.Any())
+    {
+        <h4>@Model.First().StadiumName</h4>
+        <div class="row g-4">
             @foreach (var imageViewModel in Model)
             {
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="@imageViewModel.ImageUrl" class="card-img-top" alt="@imageViewModel.Filename">
-                        <div class="card-body">
-                            
-                            <p class="card-text">Section: @imageViewModel.Section, Row: @imageViewModel.Row, Seat: @imageViewModel.SeatNumber</p>
-                            <p class="card-text"><small class="text-muted">Upload Date: @imageViewModel.UploadDate.ToShortDateString()</small></p>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <a href="@imageViewModel.ImageUrl" data-bs-toggle="modal" data-bs-target="#imageModal" data-image-url="@imageViewModel.ImageUrl">
+                        <div class="card h-100 shadow-sm hover-shadow">
+                            <div class="card-img-wrapper">
+                                @if (!string.IsNullOrEmpty(imageViewModel.ImageUrl))
+                                {
+                                    <img src="@imageViewModel.ImageUrl" 
+                                         class="card-img-top" 
+                                         alt="@imageViewModel.Filename" 
+                                         style="height: 200px; object-fit: cover;">
+                                }
+                                else
+                                {
+                                    <div class="card-img-top d-flex align-items-center justify-content-center bg-light" 
+                                         style="height: 200px;">
+                                        <span class="text-muted">圖片載入失敗或不存在</span>
+                                    </div>
+                                }
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text text-muted text-center">@imageViewModel.Filename</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             }
-        }
-        else
-        {
-            <p>這個球場沒有找到圖片。</p>
-        }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info" role="alert">
+            <i class="bi bi-info-circle"></i> 沒有找到相關圖片。
+        </div>
+    }
+
+    @* Bootstrap Modal for enlarged image *@
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="imageModalLabel">放大圖片</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center">
+            <img id="enlargedImage" src="" class="img-fluid" alt="Enlarged image">
+          </div>
+        </div>
+      </div>
     </div>
-</div> 
+
+</div>
+
+<style>
+    .hover-shadow {
+        transition: all 0.3s ease;
+    }
+    
+    .hover-shadow:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    }
+
+    .card {
+        border: none;
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+
+    .card-img-wrapper {
+        overflow: hidden;
+    }
+
+    .card-img-top {
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover .card-img-top {
+        transform: scale(1.05);
+    }
+
+    .btn-primary {
+        border-radius: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+    }
+
+    .text-primary {
+        color: #0d6efd !important;
+    }
+
+    a[data-bs-toggle="modal"] {
+        cursor: pointer;
+        text-decoration: none; /* Remove underline from link */
+        color: inherit; /* Inherit text color */
+    }
+</style>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script>
+        var imageModal = document.getElementById('imageModal');
+        imageModal.addEventListener('show.bs.modal', function (event) {
+          // Button that triggered the modal
+          var button = event.relatedTarget;
+          // Extract info from data-* attributes
+          var imageUrl = button.getAttribute('data-image-url');
+          // Update the modal's content.
+          var modalImage = imageModal.querySelector('#enlargedImage');
+          modalImage.src = imageUrl;
+        });
+    </script>
+} 

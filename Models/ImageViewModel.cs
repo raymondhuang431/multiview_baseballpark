@@ -6,6 +6,7 @@ namespace Mutiview_BaseballPark.Models
     {
         public int Id { get; set; }
         public int StadiumId { get; set; }
+        public string StadiumName { get; set; }
         public string Filename { get; set; }
         public DateTime UploadDate { get; set; }
         public string Section { get; set; }
