@@ -1,22 +1,37 @@
-﻿@{
+﻿@model IEnumerable<Mutiview_BaseballPark.Models.Stadium>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <p><a class="btn btn-primary" href="/Stadiums">查看 Stadiums 資料表</a></p>
-    
-    @if (ViewBag.Error != null)
-    {
-        <div class="alert alert-warning mt-4">
-            @ViewBag.Error
+    <h1 class="display-4">台灣棒球場多視角圖</h1>
+  
+    <div class="row mt-4">
+        <div class="col-12">
+            <h2>球場列表</h2>
+            <div class="list-group">
+                @if (Model != null)
+                {
+                    @foreach (var stadium in Model)
+                    {
+                        <div class="list-group-item">
+                            <h5 class="mb-1">@stadium.StadiumName</h5>
+                            <p class="mb-1">@stadium.City, @stadium.Country</p>
+                            <div class="mt-2">
+                                <a href="@Url.Action("ViewImages", "Home", new { stadiumId = stadium.StadiumId })"
+                                   class="btn btn-outline-primary btn-sm">
+                                    查看座位視角圖片
+                                </a>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>沒有找到球場資料。</p>
+                }
+            </div>
         </div>
-    }
-    else if (ViewBag.ImageUrl != null)
-    {
-        <div class="mt-4">
-            <img src="@ViewBag.ImageUrl" alt="Firebase Image" class="img-fluid" />
-        </div>
-    }
+    </div>
 </div>

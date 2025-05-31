@@ -1,0 +1,32 @@
+@model IEnumerable<Mutiview_BaseballPark.Models.ImageViewModel>
+
+@{
+    ViewData["Title"] = "Stadium Images";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="container">
+    <div class="row">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var imageViewModel in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="@imageViewModel.ImageUrl" class="card-img-top" alt="@imageViewModel.Filename">
+                        <div class="card-body">
+                            
+                            <p class="card-text">Section: @imageViewModel.Section, Row: @imageViewModel.Row, Seat: @imageViewModel.SeatNumber</p>
+                            <p class="card-text"><small class="text-muted">Upload Date: @imageViewModel.UploadDate.ToShortDateString()</small></p>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>這個球場沒有找到圖片。</p>
+        }
+    </div>
+</div> 

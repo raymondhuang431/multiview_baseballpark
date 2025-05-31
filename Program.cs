@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Mutiview_BaseballPark.Data;
 using Mutiview_BaseballPark.Services;
+using Microsoft.Extensions.Caching.Memory;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,7 +42,12 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
 
+// Add Memory Cache service
+builder.Services.AddMemoryCache();
+
 builder.Services.AddScoped<FirebaseService>();
+// Register ImageDbService with the connection string
+builder.Services.AddScoped<ImageDbService>(provider => new ImageDbService(connectionString));
 
 var app = builder.Build();
 
