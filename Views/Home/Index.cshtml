@@ -4,48 +4,101 @@
     ViewData["Title"] = "台灣棒球場多視角圖";
 }
 
-<div class="text-center">
-    <h1 class="display-4">@ViewData["Title"]</h1>
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">@ViewData["Title"]</h1>
+        <p class="lead text-muted">探索台灣各棒球場的精彩視角</p>
+    </div>
   
-    <div class="row mt-4">
-        <div class="col-12">
-            <h2>球場列表</h2>
-            <div class="list-group">
-                @if (Model != null)
-                {
-                    @foreach (var stadiumViewModel in Model)
-                    {
-                        <div class="list-group-item">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    @if (!string.IsNullOrEmpty(stadiumViewModel.MainImageUrl))
-                                    {
-                                        <img src="@stadiumViewModel.MainImageUrl" class="img-fluid rounded" alt="@stadiumViewModel.StadiumName 正面圖">
-                                    }
-                                    else
-                                    {
-                                        <div class="text-muted">無正面圖</div>
-                                    }
+    <div class="row g-4">
+        @if (Model != null)
+        {
+            @foreach (var stadiumViewModel in Model)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm hover-shadow">
+                        <div class="card-img-wrapper">
+                            @if (!string.IsNullOrEmpty(stadiumViewModel.MainImageUrl))
+                            {
+                                <img src="@stadiumViewModel.MainImageUrl" 
+                                     class="card-img-top" 
+                                     alt="@stadiumViewModel.StadiumName 正面圖"
+                                     style="height: 200px; object-fit: cover;">
+                            }
+                            else
+                            {
+                                <div class="card-img-top d-flex align-items-center justify-content-center bg-light" 
+                                     style="height: 200px;">
+                                    <span class="text-muted">無正面圖</span>
                                 </div>
-                                <div class="col-md-8">
-                                    <h5 class="mb-1">@stadiumViewModel.StadiumName</h5>
-                                    <p class="mb-1">@stadiumViewModel.City, @stadiumViewModel.Country</p>
-                                    <div class="mt-2">
-                                        <a href="@Url.Action("ViewImages", "Home", new { stadiumId = stadiumViewModel.StadiumId })"
-                                           class="btn btn-outline-primary btn-sm">
-                                            查看座位視角圖片
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                            }
                         </div>
-                    }
-                }
-                else
-                {
-                    <p>沒有找到球場資料。</p>
-                }
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">@stadiumViewModel.StadiumName</h5>
+                            <p class="card-text text-muted">
+                                <i class="bi bi-geo-alt"></i> @stadiumViewModel.City, @stadiumViewModel.Country
+                            </p>
+                        </div>
+                        <div class="card-footer bg-white border-top-0">
+                            <a href="@Url.Action("ViewImages", "Home", new { stadiumId = stadiumViewModel.StadiumId })"
+                               class="btn btn-primary w-100">
+                                <i class="bi bi-images"></i> 查看座位視角圖片
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <div class="alert alert-info" role="alert">
+                    <i class="bi bi-info-circle"></i> 沒有找到球場資料。
+                </div>
             </div>
-        </div>
+        }
     </div>
 </div>
+
+<style>
+    .hover-shadow {
+        transition: all 0.3s ease;
+    }
+    
+    .hover-shadow:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    }
+
+    .card {
+        border: none;
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+
+    .card-img-wrapper {
+        overflow: hidden;
+    }
+
+    .card-img-top {
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover .card-img-top {
+        transform: scale(1.05);
+    }
+
+    .btn-primary {
+        border-radius: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+    }
+
+    .text-primary {
+        color: #0d6efd !important;
+    }
+</style>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+}
