@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\Project\\Mutiview_BaseballPark\\wwwroot\\images\\baseball-field-banner.png",
+      "PackagePath": "staticwebassets\\images\\baseball-field-banner.png"
+    },
+    {
       "Id": "D:\\Project\\Mutiview_BaseballPark\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

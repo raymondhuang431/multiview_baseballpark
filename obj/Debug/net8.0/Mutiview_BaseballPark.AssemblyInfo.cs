@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Mutiview_BaseballPark")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bfda43fe61cd574839290e9f4f592a4438228d62")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2a010c806e506d9b0c6ae08d0db945f60d973212")]
 [assembly: System.Reflection.AssemblyProductAttribute("Mutiview_BaseballPark")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Mutiview_BaseballPark")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

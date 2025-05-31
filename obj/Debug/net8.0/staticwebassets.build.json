@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1jjk/6ixDrItnsruEfVIE1ySnr2ydMmK398bs8NRL8g=",
+  "Hash": "uI2dB3zQ8Z8/DfwWIwo0/fM5M1eXZxtniNoD0T1s54E=",
   "Source": "Mutiview_BaseballPark",
   "BasePath": "_content/Mutiview_BaseballPark",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\Project\\Mutiview_BaseballPark\\wwwroot\\images\\baseball-field-banner.png",
+      "SourceId": "Mutiview_BaseballPark",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Project\\Mutiview_BaseballPark\\wwwroot\\",
+      "BasePath": "_content/Mutiview_BaseballPark",
+      "RelativePath": "images/baseball-field-banner.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\baseball-field-banner.png"
     },
     {
       "Identity": "D:\\Project\\Mutiview_BaseballPark\\wwwroot\\js\\site.js",

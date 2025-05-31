@@ -7,29 +7,33 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Mutiview_BaseballPark.styles.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
+    <style>
+        .full-width-banner {
+            width: 100%;
+            height: 200px; /* 您可以根據需要調整高度 */
+            /* background-color: #f8f9fa; */ /* 移除或註解此行 */
+            background-image: url('/images/baseball-field-banner.png'); /* 設定背景圖片 */
+            background-size: cover; /* 讓圖片覆蓋整個 banner 區域 */
+            background-position: center; /* 圖片置中 */
+            background-repeat: no-repeat; /* 不重複圖片 */
+            color: #ffffff; /* 文字顏色，根據圖片調整以確保可讀性 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 20px; /* 與下方內容的間距 */
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Mutiview_BaseballPark</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    @* Full-width Banner *@
+    <div class="full-width-banner">
+        歡迎來到台灣棒球場視角圖
+    </div>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
