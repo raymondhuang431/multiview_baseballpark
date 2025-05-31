@@ -1,11 +1,11 @@
-﻿@model IEnumerable<Mutiview_BaseballPark.Models.Stadium>
+﻿@model IEnumerable<Mutiview_BaseballPark.Models.StadiumViewModel>
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "台灣棒球場多視角圖";
 }
 
 <div class="text-center">
-    <h1 class="display-4">台灣棒球場多視角圖</h1>
+    <h1 class="display-4">@ViewData["Title"]</h1>
   
     <div class="row mt-4">
         <div class="col-12">
@@ -13,16 +13,30 @@
             <div class="list-group">
                 @if (Model != null)
                 {
-                    @foreach (var stadium in Model)
+                    @foreach (var stadiumViewModel in Model)
                     {
                         <div class="list-group-item">
-                            <h5 class="mb-1">@stadium.StadiumName</h5>
-                            <p class="mb-1">@stadium.City, @stadium.Country</p>
-                            <div class="mt-2">
-                                <a href="@Url.Action("ViewImages", "Home", new { stadiumId = stadium.StadiumId })"
-                                   class="btn btn-outline-primary btn-sm">
-                                    查看座位視角圖片
-                                </a>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    @if (!string.IsNullOrEmpty(stadiumViewModel.MainImageUrl))
+                                    {
+                                        <img src="@stadiumViewModel.MainImageUrl" class="img-fluid rounded" alt="@stadiumViewModel.StadiumName 正面圖">
+                                    }
+                                    else
+                                    {
+                                        <div class="text-muted">無正面圖</div>
+                                    }
+                                </div>
+                                <div class="col-md-8">
+                                    <h5 class="mb-1">@stadiumViewModel.StadiumName</h5>
+                                    <p class="mb-1">@stadiumViewModel.City, @stadiumViewModel.Country</p>
+                                    <div class="mt-2">
+                                        <a href="@Url.Action("ViewImages", "Home", new { stadiumId = stadiumViewModel.StadiumId })"
+                                           class="btn btn-outline-primary btn-sm">
+                                            查看座位視角圖片
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     }

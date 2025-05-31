@@ -38,9 +38,9 @@ else
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Add PostgreSQL Database Context
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(connectionString));
+// Remove ApplicationDbContext registration as Stadium data will be fetched using Dapper
+// builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//     options.UseNpgsql(connectionString));
 
 // Add Memory Cache service
 builder.Services.AddMemoryCache();
@@ -48,6 +48,8 @@ builder.Services.AddMemoryCache();
 builder.Services.AddScoped<FirebaseService>();
 // Register ImageDbService with the connection string
 builder.Services.AddScoped<ImageDbService>(provider => new ImageDbService(connectionString));
+// Register StadiumDbService with the connection string
+builder.Services.AddScoped<StadiumDbService>(provider => new StadiumDbService(connectionString));
 
 var app = builder.Build();
 

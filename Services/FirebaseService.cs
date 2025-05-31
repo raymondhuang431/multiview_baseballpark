@@ -70,10 +70,18 @@ namespace Mutiview_BaseballPark.Services
                 }
 
                 // 檢查檔案是否存在
-                var obj = _storageClient.GetObject(_bucketName, imagePath);
-                if (obj == null)
+                try
                 {
-                    throw new Exception($"找不到圖片: {imagePath}");
+                    _logger.LogInformation("Checking Firebase Storage object: bucket='{BucketName}', path='{ImagePath}'", _bucketName, imagePath);
+                    var obj = _storageClient.GetObject(_bucketName, imagePath);
+                    if (obj == null)
+                    {
+                        throw new Exception($"找不到圖片: {imagePath}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"無法存取圖片: {imagePath}, 錯誤: {ex.Message}");
                 }
 
                 // 使用 Firebase Storage 的官方 URL 格式
@@ -83,7 +91,7 @@ namespace Mutiview_BaseballPark.Services
                 // 將 URL 存入快取，設定一個過期時間 (例如 24 小時)
                 _cache.Set(imagePath, url, new MemoryCacheEntryOptions
                 {
-                    AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24)
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1)
                 });
 
                 _logger.LogInformation("Successfully generated and cached URL for image path: {ImagePath}", imagePath);

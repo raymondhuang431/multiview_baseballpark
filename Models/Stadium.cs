@@ -34,5 +34,8 @@ namespace Mutiview_BaseballPark.Models
 
         [Column("home_team")]
         public string HomeTeam { get; set; }
+
+        [Column("main_image_url")]
+        public string MainImageUrlFilename { get; set; }
     }
 } 

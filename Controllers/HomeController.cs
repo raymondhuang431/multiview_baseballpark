@@ -13,21 +13,48 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly FirebaseService _firebaseService;
-    private readonly ApplicationDbContext _context;
     private readonly ImageDbService _imageDbService;
+    private readonly StadiumDbService _stadiumDbService;
 
-    public HomeController(ILogger<HomeController> logger, FirebaseService firebaseService, ApplicationDbContext context, ImageDbService imageDbService)
+    public HomeController(ILogger<HomeController> logger, FirebaseService firebaseService, ImageDbService imageDbService, StadiumDbService stadiumDbService)
     {
         _logger = logger;
         _firebaseService = firebaseService;
-        _context = context;
         _imageDbService = imageDbService;
+        _stadiumDbService = stadiumDbService;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        var stadiums = _context.Stadiums.ToList();
-        return View(stadiums);
+        var stadiums = await _stadiumDbService.GetStadiumsAsync();
+
+        var stadiumViewModels = new List<StadiumViewModel>();
+        foreach (var stadium in stadiums)
+        {
+            string mainImageUrl = null;
+            if (!string.IsNullOrEmpty(stadium.MainImageUrlFilename))
+            {
+                try
+                {
+                    mainImageUrl = _firebaseService.GetImageUrl(stadium.MainImageUrlFilename);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error getting main image URL for stadium {StadiumName} with filename {Filename}", stadium.StadiumName, stadium.MainImageUrlFilename);
+                }
+            }
+
+            stadiumViewModels.Add(new StadiumViewModel
+            {
+                StadiumId = stadium.StadiumId,
+                StadiumName = stadium.StadiumName,
+                City = stadium.City,
+                Country = stadium.Country,
+                MainImageUrl = mainImageUrl
+            });
+        }
+
+        return View(stadiumViewModels);
     }
 
     public async Task<IActionResult> ViewImages(int stadiumId)
